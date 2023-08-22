@@ -1,8 +1,15 @@
-﻿// test_work.h : Include file for standard system include files,
-// or project specific include files.
+﻿#pragma once
 
-#pragma once
+#include "../core/core.h"
+#include "monkey.h"
 
-#include <iostream>
+class TWServer : public TWPlatformServerBase
+{
+public:
+	TWServer();
+	virtual ~TWServer() = default;
+	virtual void Run() override;
 
-// TODO: Reference additional headers your program requires here.
+protected:
+	TWMonkey Monkey;
+};

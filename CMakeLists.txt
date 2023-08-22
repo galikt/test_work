@@ -14,3 +14,7 @@ project ("test_work")
 # Include sub-projects.
 add_subdirectory ("server")
 add_subdirectory ("client")
+add_subdirectory ("core")
+
+
+#target_link_libraries(server core)

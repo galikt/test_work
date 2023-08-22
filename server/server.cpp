@@ -1,30 +1,40 @@
-﻿// test_work.cpp : Defines the entry point for the application.
-//
+﻿#include "server.h"
 
-#include "server.h"
-#include "table.h"
-#include "column.h"
-#include <stdint.h>
-#include <memory>
-#include <string>
+TWServer::TWServer()
+{
+	auto table = std::make_shared<TWTable>();
+
+	auto first_name = TWMetaObject::CreateColumn(ObjectType::OBJ_COLUMN_STRING);
+	first_name->Head = std::string("Name");
+	table->InsertColumn(std::move(first_name));
+
+	auto last_name = TWMetaObject::CreateColumn(ObjectType::OBJ_COLUMN_STRING);
+	last_name->Head = std::string("Last Name");
+	table->InsertColumn(std::move(last_name));
+
+	auto age = TWMetaObject::CreateColumn(ObjectType::OBJ_COLUMN_INT);
+	age->Head = std::string("age");
+	table->InsertColumn(std::move(age));
+
+	auto online = TWMetaObject::CreateColumn(ObjectType::OBJ_COLUMN_BOOL);
+	online->Head = std::string("Online");
+	table->InsertColumn(std::move(online));
+
+	RegisterObject(table);
+}
+
+void TWServer::Run()
+{
+	while (true)
+	{
+		Sleep(1000);
+	}
+}
 
 int main()
 {
-	setlocale(LC_ALL, "ru_RU.UTF-8");
-
-	auto table = std::make_unique<Table>();
-
-	auto first_name = std::make_unique<Column<std::string>>(std::string("Имя"));
-	table->InsertColumn(std::move(first_name));
-
-	auto last_name = std::make_unique<Column<std::string>>(std::string("Фамилия"));
-	table->InsertColumn(std::move(last_name));
-
-	auto age = std::make_unique<Column<uint8_t>>(std::string("Возраст"));
-	table->InsertColumn(std::move(age));
-
-	auto online = std::make_unique<Column<bool>>(std::string("В сети"));
-	table->InsertColumn(std::move(online));
+	auto server = std::make_unique<TWServer>();
+	server->Run();
 
 	return 0;
 }

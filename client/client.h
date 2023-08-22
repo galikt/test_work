@@ -1,8 +1,13 @@
-﻿// test_work.h : Include file for standard system include files,
-// or project specific include files.
+﻿#pragma once
 
-#pragma once
+#include "../core/core.h"
 
-#include <iostream>
+class TWClient : public TWPlatformClientBase
+{
+public:
+	TWClient();
+	virtual ~TWClient() = default;
+	
+	void Run() override;
 
-// TODO: Reference additional headers your program requires here.
+};
